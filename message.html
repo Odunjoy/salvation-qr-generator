@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A message from Jesus - He loves you and wants to be part of your life">
+    <title>Jesus Loves You | Salvation Message</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK (Compatibility version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="cross-icon">✝</div>
+            <h1 class="app-title">A Message For You</h1>
+        </header>
+
+        <!-- Loading State -->
+        <div id="loading" class="glass-card" style="text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">⏳</div>
+            <p>Loading your message...</p>
+        </div>
+
+        <!-- Message Content -->
+        <div id="message-container" class="glass-card" style="display: none;">
+            <!-- Message Title -->
+            <h2 id="message-title" class="message-title"></h2>
+
+            <!-- Message Text -->
+            <p id="message-text" class="message-text"></p>
+
+            <!-- Scripture -->
+            <div class="scripture-box">
+                <p id="scripture-text" class="scripture-text"></p>
+                <p id="scripture-reference" class="scripture-reference"></p>
+            </div>
+
+            <!-- Prayer Prompt -->
+            <div
+                style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%); border-radius: 12px; border-left: 4px solid var(--color-gold);">
+                <h3 style="margin: 0 0 0.5rem 0; color: var(--color-gold); font-size: 1.25rem;">🙏 Pray With Me</h3>
+                <p id="prayer-text" style="margin: 0; font-style: italic;"></p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons" style="margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="getRandomMessage()">
+                    <span>✨</span>
+                    <span>Get Another Message</span>
+                </button>
+
+                <button class="btn btn-secondary" onclick="shareMessage()">
+                    <span>📤</span>
+                    <span>Share This Message</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer
+            style="margin-top: 3rem; text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.5); border-radius: 16px;">
+            <p style="margin: 0 0 1rem 0; font-size: 1.1rem; color: #555;">
+                <strong>Need prayer or someone to talk to?</strong>
+            </p>
+            <div style="display: inline-block;">
+                <a href="https://wa.me/2348067302611?text=Hello,%20I%20scanned%20your%20QR%20code%20and%20would%20like%20to%20connect"
+                    target="_blank" class="btn btn-primary" style="font-size: 0.95rem;">
+                    <span>💬</span>
+                    <span>Chat With Me on WhatsApp</span>
+                </a>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888;">+234 806 730 2611</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+
+    <!-- Firebase Analytics -->
+    <script src="firebase-config.js"></script>
+
+    <script>
+        // Initialize the message display when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initMessageDisplay();
+
+            // Track the scan after message is loaded
+            setTimeout(() => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const category = urlParams.get('category');
+                const messageTitle = document.getElementById('message-title')?.textContent;
+
+                if (category && messageTitle && typeof trackScan === 'function') {
+                    trackScan(category, { title: messageTitle });
+                }
+            }, 1000);
+
+            // Hide loading after initialization
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

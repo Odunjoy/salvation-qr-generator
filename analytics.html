@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard | Salvation QR</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="analytics.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="background-animation"></div>
+
+    <!-- Analytics Container -->
+    <div class="analytics-container">
+        <!-- Header -->
+        <header class="analytics-header">
+            <div>
+                <h1>📊 Analytics Dashboard</h1>
+                <p>Monitor your QR code performance and reach</p>
+                <p style="margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #666;">
+                    Logged in as: <strong id="user-email">Loading...</strong>
+                </p>
+            </div>
+            <div class="header-actions">
+                <button onclick="refreshData()" class="btn btn-secondary">🔄 Refresh</button>
+                <button onclick="exportToCSV()" class="btn btn-primary">📥 Export CSV</button>
+                <button onclick="clearAllData()" class="btn" style="background: #e74c3c; color: white;">🗑️ Clear All
+                    Data</button>
+                <button onclick="handleLogout()" class="btn btn-secondary">🚪 Logout</button>
+                <a href="index.html" class="btn btn-secondary">← Back to Generator</a>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <h3 id="total-scans">0</h3>
+                    <p>Total Scans</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📱</div>
+                <div class="stat-content">
+                    <h3 id="mobile-percentage">0%</h3>
+                    <p>Mobile Users</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-content">
+                    <h3 id="unique-countries">0</h3>
+                    <p>Countries</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-content">
+                    <h3 id="top-category">-</h3>
+                    <p>Top Category</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 1 -->
+        <div class="charts-row">
+            <div class="chart-card">
+                <h3>Scans by Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3>Device Types</h3>
+                <canvas id="deviceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Charts Row 2 -->
+        <div class="charts-row">
+            <div class="chart-card full-width">
+                <h3>Scans Over Time</h3>
+                <canvas id="timeChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Tables -->
+        <div class="tables-section">
+            <div class="table-card">
+                <h3>🌍 Top Countries</h3>
+                <table id="countries-table">
+                    <thead>
+                        <tr>
+                            <th>Country</th>
+                            <th>Scans</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody id="countries-tbody">
+                        <tr>
+                            <td colspan="3" class="loading">Loading data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-card">
+                <h3>📱 Browser Distribution</h3>
+                <table id="browsers-table">
+                    <thead>
+                        <tr>
+                            <th>Browser</th>
+                            <th>Scans</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody id="browsers-tbody">
+                        <tr>
+                            <td colspan="3" class="loading">Loading data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Scans -->
+        <div class="table-card full-width">
+            <h3>🕒 Recent Scans</h3>
+            <table id="recent-scans-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Category</th>
+                        <th>Message</th>
+                        <th>Device</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody id="recent-scans-tbody">
+                    <tr>
+                        <td colspan="5" class="loading">Loading data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="analytics.js"></script>
+</body>
+
+</html>

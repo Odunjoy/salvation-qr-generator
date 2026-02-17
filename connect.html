@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizens of Light Church - Connect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .church-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+            margin: 2rem 0;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .link-btn:active {
+            transform: translateY(0);
+        }
+
+        .icon {
+            font-size: 1.5rem;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item {
+            color: #555;
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .church-name {
+                font-size: 1.3rem;
+            }
+
+            .link-btn {
+                padding: 0.9rem 1.25rem;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">✝</div>
+            <h1 class="church-name">Citizens of Light Church</h1>
+            <p class="tagline">Raising generations of believers, liberated through the light of God's Word</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="links">
+            <a href="https://citizensoflightchurch.org" target="_blank" class="link-btn">
+                <span class="icon">🌐</span>
+                <span>Visit Our Website</span>
+            </a>
+
+            <a href="https://www.youtube.com/channel/UCZNnNuy7sKIJSruLtO7lREw" target="_blank" class="link-btn">
+                <span class="icon">📺</span>
+                <span>Subscribe on YouTube</span>
+            </a>
+
+            <a href="https://web.facebook.com/citizensoflightchurch" target="_blank" class="link-btn">
+                <span class="icon">👥</span>
+                <span>Follow on Facebook</span>
+            </a>
+
+            <a href="https://www.instagram.com/citizensoflightchurch/" target="_blank" class="link-btn">
+                <span class="icon">📷</span>
+                <span>Follow on Instagram</span>
+            </a>
+
+            <a href="https://mixlr.com/citizensoflightchurch" target="_blank" class="link-btn">
+                <span class="icon">🎙️</span>
+                <span>Listen Live on Mixlr</span>
+            </a>
+        </div>
+
+        <div class="contact-info">
+            <h3>Contact Us</h3>
+            <div class="contact-item">
+                <span>📍</span>
+                <span>3 Ikorodu Road, Maryland, Lagos</span>
+            </div>
+            <div class="contact-item">
+                <span>📞</span>
+                <span>+234 806 297 9327</span>
+            </div>
+            <div class="contact-item">
+                <span>✉️</span>
+                <a href="mailto:info@citizensoflightchurch.org">info@citizensoflightchurch.org</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

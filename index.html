@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate QR codes that share Jesus's love, healing, and salvation with others">
+  <title>Salvation QR Code Generator | Share God's Love</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+  <!-- Animated Background -->
+  <div class="background-animation"></div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="cross-icon">✝</div>
+      <h1 class="app-title">Salvation QR Generator</h1>
+      <p class="app-subtitle">Share the love of Jesus with the world, one scan at a time</p>
+
+      <!-- Analytics Link -->
+      <div style="margin-top: 1rem;">
+        <a href="analytics.html" class="btn btn-secondary" style="display: inline-flex; font-size: 0.9rem;">
+          <span>📊</span>
+          <span>View Analytics Dashboard</span>
+        </a>
+      </div>
+
+      <!-- Church Social Media QR Link -->
+      <div style="margin-top: 0.75rem;">
+        <a href="church-qr.html" class="btn btn-primary" style="display: inline-flex; font-size: 0.9rem;">
+          <span>🏛️</span>
+          <span>Church Social Media QR</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="glass-card">
+        <h2 class="text-center mb-lg">Choose a Message Category</h2>
+        <p class="text-center mb-lg" style="color: #666;">Select a category to generate a QR code that will share an
+          inspiring message about Jesus</p>
+
+        <!-- Category Selector -->
+        <div id="category-selector" class="category-selector"></div>
+
+        <!-- QR Code Display -->
+        <div class="qr-display">
+          <h3
+            style="font-weight: 700; font-size: 2rem; color: var(--color-gold); margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);">
+            FREE</h3>
+          <div id="qr-code"></div>
+
+          <!-- Customization Controls -->
+          <div id="customization-controls"
+            style="display: none; max-width: 600px; margin: 2rem auto; text-align: left;">
+            <h3 style="text-align: center; color: #4a90e2; margin-bottom: 1rem;">🎨 Customize Your QR Code</h3>
+
+            <!-- Teaser Message Selector -->
+            <div style="margin-bottom: 1.5rem;">
+              <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">
+                📝 Choose Your Teaser Message:
+              </label>
+              <select id="teaser-selector"
+                style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 2px solid #ddd; font-size: 1rem; background: white;">
+                <option value="0">✨ "What if this is the message you've been waiting for?"</option>
+                <option value="1">🎁 "Your blessing is inside. Are you ready?"</option>
+                <option value="2">❓ "Someone needs to hear this today. Is it you?"</option>
+                <option value="3">💫 "What does God want to tell you today?"</option>
+                <option value="4">⚡ "This could change everything. Scan to discover."</option>
+                <option value="5">🔓 "A message of hope is waiting for you."</option>
+                <option value="6">💎 "Don't miss what's inside. Your breakthrough awaits."</option>
+              </select>
+            </div>
+
+            <!-- Testimonial Selector -->
+            <div style="margin-bottom: 1.5rem;">
+              <label style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">
+                ⭐ Choose Your Testimonial:
+              </label>
+              <select id="testimonial-selector"
+                style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 2px solid #ddd; font-size: 1rem; background: white;">
+                <option value="0">⭐⭐⭐⭐⭐ "This brought me to tears"</option>
+                <option value="1">⭐⭐⭐⭐⭐ "I needed this today"</option>
+                <option value="2">⭐⭐⭐⭐⭐ "Life-changing message"</option>
+                <option value="3">⭐⭐⭐⭐⭐ "Exactly what I needed to hear"</option>
+                <option value="4">⭐⭐⭐⭐⭐ "God spoke to me through this"</option>
+                <option value="5">⭐⭐⭐⭐⭐ "1000+ lives changed"</option>
+                <option value="6">⭐⭐⭐⭐⭐ "This gave me hope again"</option>
+              </select>
+            </div>
+
+            <!-- Random Button -->
+            <button onclick="randomizeSelections()" class="btn btn-secondary" style="width: 100%; margin-bottom: 1rem;">
+              <span>🎲</span>
+              <span>Randomize Selection</span>
+            </button>
+
+            <!-- Preview Button -->
+            <button onclick="showPreview()" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">
+              <span>👁️</span>
+              <span>Preview Design</span>
+            </button>
+          </div>
+
+          <div class="action-buttons">
+            <button id="download-btn" class="btn btn-primary" onclick="downloadQRCode()" style="display: none;">
+              <span>📥</span>
+              <span>Download QR Code</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="mt-xl" style="background: rgba(103, 126, 234, 0.1); padding: 1.5rem; border-radius: 16px;">
+          <h3 style="text-align: center; color: #4a90e2; margin-bottom: 1rem;">📲 How It Works</h3>
+          <ol style="color: #555; line-height: 1.8; padding-left: 1.5rem;">
+            <li><strong>Select a category</strong> from the options above</li>
+            <li><strong>Download the QR code</strong> image to your device</li>
+            <li><strong>Share it</strong> - print it, post it on social media, or send it to friends</li>
+            <li><strong>Watch God work</strong> as people scan and receive His message of love!</li>
+          </ol>
+        </div>
+      </div>
+    </main>
+
+    <!-- Preview Modal -->
+    <div id="preview-modal" class="preview-modal" style="display: none;">
+      <div class="preview-overlay" onclick="closePreview()"></div>
+      <div class="preview-content">
+        <div class="preview-header">
+          <h2>📱 Premium QR Code Preview</h2>
+          <button onclick="closePreview()" class="close-btn">✕</button>
+        </div>
+        <div class="preview-body">
+          <canvas id="preview-canvas"></canvas>
+        </div>
+        <div class="preview-footer">
+          <button onclick="closePreview()" class="btn btn-secondary">Close</button>
+          <button onclick="downloadFromPreview()" class="btn btn-primary">📥 Download This Design</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>✝ Made with love to share the Gospel of Jesus Christ ✝</p>
+      <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #888;">
+        "Go into all the world and preach the gospel to all creation." - Mark 16:15
+      </p>
+
+      <!-- WhatsApp Contact -->
+      <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.3);">
+        <p style="margin-bottom: 0.75rem; color: #666; font-size: 0.95rem;">Need prayer or spiritual guidance?</p>
+        <a href="https://wa.me/2348067302611" target="_blank" class="btn btn-secondary" style="font-size: 0.95rem;">
+          <span>💬</span>
+          <span>Contact Me on WhatsApp</span>
+        </a>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888;">+234 806 730 2611</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+  <script>
+    // Initialize the generator when page loads
+    document.addEventListener('DOMContentLoaded', initGenerator);
+  </script>
+</body>
+
+</html>
