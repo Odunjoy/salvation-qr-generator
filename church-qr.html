@@ -148,6 +148,77 @@
         .preview-link:hover {
             text-decoration: underline;
         }
+
+        /* Preview Modal Styles */
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            overflow: auto;
+            padding: 2rem;
+        }
+
+        .preview-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .preview-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-preview {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: white;
+            color: #333;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-preview:hover {
+            transform: rotate(90deg);
+            background: #f0f0f0;
+        }
+
+        .preview-actions {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .preview-download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preview-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
     </style>
 </head>
 
@@ -169,6 +240,7 @@
                 <div id="qr-code"></div>
             </div>
 
+            <button onclick="previewQR()" class="download-btn" style="margin-right: 1rem;">👁️ Preview Design</button>
             <button onclick="downloadQR()" class="download-btn">📥 Download QR Code</button>
 
             <br>
@@ -198,6 +270,17 @@
         </div>
     </div>
 
+    <!-- Preview Modal -->
+    <div id="previewModal" class="preview-modal" onclick="closePreview(event)">
+        <div class="preview-content">
+            <button class="close-preview" onclick="closePreview()">×</button>
+            <img id="previewImage" class="preview-image" alt="QR Code Preview">
+            <div class="preview-actions">
+                <button onclick="downloadFromPreview()" class="preview-download-btn">📥 Download This Design</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Generate QR code pointing to the connect landing page
         const qrCode = new QRCode(document.getElementById('qr-code'), {
@@ -208,12 +291,12 @@
             colorLight: '#ffffff'
         });
 
-        // Download QR code function - ULTRA-PREMIUM CHURCH DESIGN
-        function downloadQR() {
+        // Shared function to generate premium church QR design
+        function generatePremiumChurchQR() {
             const qrCanvas = document.querySelector('#qr-code canvas');
             if (!qrCanvas) {
                 alert('QR code not found');
-                return;
+                return null;
             }
 
             // Create professional canvas
@@ -308,7 +391,36 @@
             ctx.fillText('3 Ikorodu Road, Maryland, Lagos', canvas.width / 2, canvas.height - 90);
             ctx.fillText('+234 806 297 9327 • info@citizensoflightchurch.org', canvas.width / 2, canvas.height - 70);
 
-            // Download
+            return canvas;
+        }
+
+        // Preview QR code
+        function previewQR() {
+            const canvas = generatePremiumChurchQR();
+            if (!canvas) return;
+
+            const previewImage = document.getElementById('previewImage');
+            previewImage.src = canvas.toDataURL();
+            document.getElementById('previewModal').style.display = 'block';
+        }
+
+        // Close preview modal
+        function closePreview(event) {
+            if (event && event.target.className === 'preview-content') return; // Prevent closing when clicking inside content
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        // Download from preview
+        function downloadFromPreview() {
+            downloadQR();
+            closePreview();
+        }
+
+        // Download QR code function
+        function downloadQR() {
+            const canvas = generatePremiumChurchQR();
+            if (!canvas) return;
+
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
