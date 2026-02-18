@@ -68,21 +68,54 @@ function renderCategorySelector() {
   console.log('Added', Object.keys(categories).length, 'category cards');
 }
 
-// Select a category
-function selectCategory(key, element) {
-  console.log('Category selected:', key);
+// Select a category and generate QR code
+async function selectCategory(category) {
+  console.log('Selecting category:', category);
+  selectedCategory = category;
 
-  // Remove active class from all cards
+  // Add selection visual feedback
   document.querySelectorAll('.category-card').forEach(card => {
-    card.classList.remove('active');
+    card.classList.remove('selected');
   });
+  event.currentTarget.classList.add('selected');
 
-  // Add active class to selected card
-  element.classList.add('active');
-  selectedCategory = key;
+  // wait for messages to load if not loaded yet
+  if (Object.keys(messages).length === 0) {
+    console.log('Waiting for messages to load...');
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
 
   // Generate QR code
-  generateQRCode(key);
+  generateQRCode(category);
+
+  // Show download button
+  document.getElementById('download-btn').style.display = 'flex';
+
+  // Get current selections
+  const teaserIndex = parseInt(document.getElementById('teaser-selector').value);
+  const testimonialIndex = parseInt(document.getElementById('testimonial-selector').value);
+
+  // Generate and show shareable link
+  const messageUrl = `https://odunjoy.github.io/salvation-qr-generator/message.html?category=${category}&teaser=${teaserIndex}&testimonial=${testimonialIndex}`;
+  document.getElementById('messageLink').value = messageUrl;
+  document.getElementById('shareLinkSection').style.display = 'block';
+}
+
+// Copy message link to clipboard
+function copyMessageLink() {
+  const linkInput = document.getElementById('messageLink');
+  linkInput.select();
+  document.execCommand('copy');
+
+  const btn = event.target;
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '✅ Copied!';
+  btn.style.background = '#2e7d32';
+
+  setTimeout(() => {
+    btn.innerHTML = originalText;
+    btn.style.background = '#4caf50';
+  }, 2000);
 }
 
 // Generate QR code for selected category

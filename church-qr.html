@@ -267,6 +267,21 @@
                     <li>Add it to business cards or flyers</li>
                 </ul>
             </div>
+
+            <div class="info-box" style="margin-top: 1rem; background: #e8f5e9; border-left-color: #4caf50;">
+                <h3>📱 Share This Link:</h3>
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                    <input type="text" id="shareLink"
+                        value="https://odunjoy.github.io/salvation-qr-generator/connect.html" readonly
+                        style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: monospace;">
+                    <button onclick="copyLink()"
+                        style="padding: 10px 20px; background: #4caf50; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                        📋 Copy
+                    </button>
+                </div>
+                <p style="margin-top: 8px; font-size: 13px; color: #666;">Share this link on social media, emails, or
+                    text messages!</p>
+            </div>
         </div>
     </div>
 
@@ -429,6 +444,23 @@
                 a.click();
                 URL.revokeObjectURL(url);
             });
+        }
+
+        // Copy link to clipboard
+        function copyLink() {
+            const linkInput = document.getElementById('shareLink');
+            linkInput.select();
+            document.execCommand('copy');
+
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ Copied!';
+            btn.style.background = '#2e7d32';
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '#4caf50';
+            }, 2000);
         }
     </script>
 </body>
