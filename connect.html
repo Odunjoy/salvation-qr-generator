@@ -375,6 +375,60 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Simple Analytics Tracking for Church Connect QR Scans
+        function trackQRScan() {
+            try {
+                // Get visitor info (privacy-friendly)
+                const visitData = {
+                    timestamp: new Date().toISOString(),
+                    page: 'church-connect',
+                    device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+                    referrer: document.referrer || 'direct',
+                    source: 'qr-scan'
+                };
+
+                // Send to Firebase or your analytics endpoint
+                // Using localStorage as fallback for demo
+                const scans = JSON.parse(localStorage.getItem('church_qr_scans') || '[]');
+                scans.push(visitData);
+                localStorage.setItem('church_qr_scans', JSON.stringify(scans));
+
+                // Also try to send to Firebase if available
+                if (typeof firebase !== 'undefined' && firebase.database) {
+                    firebase.database().ref('scans/church-connect').push(visitData);
+                }
+
+                console.log('✅ QR Scan tracked:', visitData);
+            } catch (error) {
+                console.log('Analytics tracking failed:', error);
+            }
+        }
+
+        // Track when page loads
+        window.addEventListener('load', trackQRScan);
+
+        // Track link clicks
+        document.querySelectorAll('.link-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const platform = this.textContent.trim();
+                console.log('📊 User clicked:', platform);
+
+                try {
+                    if (typeof firebase !== 'undefined' && firebase.database) {
+                        firebase.database().ref('clicks/church-connect').push({
+                            timestamp: new Date().toISOString(),
+                            platform: platform,
+                            device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+                        });
+                    }
+                } catch (error) {
+                    console.log('Click tracking failed:', error);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
