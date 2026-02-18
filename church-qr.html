@@ -208,19 +208,115 @@
             colorLight: '#ffffff'
         });
 
-        // Download QR code function
+        // Download QR code function - ULTRA-PREMIUM CHURCH DESIGN
         function downloadQR() {
-            const canvas = document.querySelector('#qr-code canvas');
-            if (canvas) {
-                canvas.toBlob((blob) => {
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'citizens-of-light-church-connect-qr.png';
-                    a.click();
-                    URL.revokeObjectURL(url);
-                });
+            const qrCanvas = document.querySelector('#qr-code canvas');
+            if (!qrCanvas) {
+                alert('QR code not found');
+                return;
             }
+
+            // Create professional canvas
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = 800;
+            canvas.height = 1100;
+
+            // LUXURY CREAM BACKGROUND
+            ctx.fillStyle = '#FAF8F5';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // MINIMAL ELEGANT BORDER
+            const margin = 50;
+            ctx.strokeStyle = 'rgba(44, 36, 32, 0.08)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(margin, margin, canvas.width - margin * 2, canvas.height - margin * 2);
+
+            // CHURCH ICON (Cross)
+            ctx.font = '72px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#6a4c93';
+            ctx.fillText('✝', canvas.width / 2, 130);
+
+            // CHURCH NAME
+            ctx.font = '600 36px Georgia, serif';
+            ctx.fillStyle = '#2C2420';
+            ctx.fillText('Citizens of Light Church', canvas.width / 2, 200);
+
+            // TAGLINE
+            ctx.font = 'italic 16px Georgia, serif';
+            ctx.fillStyle = '#8B7355';
+            ctx.fillText('Maryland, Lagos', canvas.width / 2, 230);
+
+            // ELEGANT DIVIDER
+            ctx.strokeStyle = 'rgba(44, 36, 32, 0.15)';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(250, 260);
+            ctx.lineTo(550, 260);
+            ctx.stroke();
+
+            // MAIN HEADING
+            ctx.font = '400 28px Georgia, serif';
+            ctx.fillStyle = '#2C2420';
+            ctx.fillText('Connect With Us', canvas.width / 2, 320);
+
+            // DESCRIPTION
+            ctx.font = '300 18px Georgia, serif';
+            ctx.fillStyle = '#6a6a6a';
+            ctx.fillText('Scan to access all our social media', canvas.width / 2, 355);
+            ctx.fillText('and worship with us online', canvas.width / 2, 380);
+
+            // QR CODE with MINIMAL FRAME
+            const qrSize = 420;
+            const qrX = (canvas.width - qrSize) / 2;
+            const qrY = 430;
+
+            // Ultra-thin border
+            ctx.strokeStyle = '#2C2420';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(qrX - 1, qrY - 1, qrSize + 2, qrSize + 2);
+
+            // Minimal inner spacing
+            const innerPadding = 12;
+            ctx.fillStyle = '#F5F0EB';
+            ctx.fillRect(qrX - innerPadding, qrY - innerPadding, qrSize + innerPadding * 2, qrSize + innerPadding * 2);
+
+            // White QR background
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(qrX, qrY, qrSize, qrSize);
+
+            // Draw QR code
+            ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
+
+            // PLATFORMS LISTED
+            ctx.font = '500 15px Inter, sans-serif';
+            ctx.fillStyle = '#2C2420';
+            ctx.letterSpacing = '1px';
+            ctx.fillText('INCLUDED', canvas.width / 2, qrY + qrSize + 60);
+
+            ctx.font = '400 14px Georgia, serif';
+            ctx.fillStyle = '#6a6a6a';
+            ctx.letterSpacing = '0px';
+            ctx.fillText('YouTube • Facebook • Instagram • Mixlr • Website', canvas.width / 2, qrY + qrSize + 90);
+
+            // CONTACT INFO
+            ctx.font = '300 12px Inter, sans-serif';
+            ctx.fillStyle = 'rgba(44, 36, 32, 0.5)';
+            ctx.letterSpacing = '0.5px';
+            ctx.fillText('3 Ikorodu Road, Maryland, Lagos', canvas.width / 2, canvas.height - 90);
+            ctx.fillText('+234 806 297 9327 • info@citizensoflightchurch.org', canvas.width / 2, canvas.height - 70);
+
+            // Download
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'clc-maryland-connect-ultra-premium.png';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
         }
     </script>
 </body>
