@@ -11,6 +11,14 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <!-- Firebase Config & Tracking -->
+    <script src="firebase-config.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -377,50 +385,34 @@
     </div>
 
     <script>
-        // Simple Analytics Tracking for Church Connect QR Scans
-        function trackQRScan() {
-            try {
-                // Get visitor info (privacy-friendly)
-                const visitData = {
-                    timestamp: new Date().toISOString(),
-                    page: 'church-connect',
-                    device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-                    referrer: document.referrer || 'direct',
-                    source: 'qr-scan'
-                };
-
-                // Send to Firebase or your analytics endpoint
-                // Using localStorage as fallback for demo
-                const scans = JSON.parse(localStorage.getItem('church_qr_scans') || '[]');
-                scans.push(visitData);
-                localStorage.setItem('church_qr_scans', JSON.stringify(scans));
-
-                // Also try to send to Firebase if available
-                if (typeof firebase !== 'undefined' && firebase.database) {
-                    firebase.database().ref('scans/church-connect').push(visitData);
-                }
-
-                console.log('✅ QR Scan tracked:', visitData);
-            } catch (error) {
-                console.log('Analytics tracking failed:', error);
+        // Track page load as a scan
+        window.addEventListener('load', function () {
+            // Use the centralized tracking function from firebase-config.js
+            if (typeof trackScan === 'function') {
+                trackScan('Church Connect', { title: 'Landing Page' });
+                console.log('✅ Tracking scan for Church Connect');
+            } else {
+                console.error('❌ trackScan function not found. Is firebase-config.js loaded?');
             }
-        }
-
-        // Track when page loads
-        window.addEventListener('load', trackQRScan);
+        });
 
         // Track link clicks
-        document.querySelectorAll('.link-btn').forEach(btn => {
+        document.querySelectorAll('.link-btn, .worship-btn').forEach(btn => {
             btn.addEventListener('click', function (e) {
-                const platform = this.textContent.trim();
-                console.log('📊 User clicked:', platform);
+                const text = this.querySelector('span:not(.icon)') ?
+                    this.querySelector('span:not(.icon)').textContent :
+                    this.textContent.trim();
+
+                console.log('📊 User clicked:', text);
 
                 try {
-                    if (typeof firebase !== 'undefined' && firebase.database) {
+                    // Use the initialized firebase instance from firebase-config.js
+                    if (typeof firebase !== 'undefined' && firebase.app().database()) {
                         firebase.database().ref('clicks/church-connect').push({
                             timestamp: new Date().toISOString(),
-                            platform: platform,
-                            device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+                            platform: text,
+                            device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+                            referrer: document.referrer || 'direct'
                         });
                     }
                 } catch (error) {
