@@ -117,7 +117,7 @@ async function selectCategory(category) {
 
   // Generate and show shareable link (ULTRA-SHORT FORMAT)
   const shortCode = shortCodes[category] || category;
-  const messageUrl = `odunjoy.github.io/s/m?c=${shortCode}&t=${teaserIndex}&s=${testimonialIndex}`;
+  const messageUrl = `odunjoy.github.io/s-qr-generator/m?c=${shortCode}&t=${teaserIndex}&s=${testimonialIndex}`;
   document.getElementById('messageLink').value = messageUrl;
   document.getElementById('shareLinkSection').style.display = 'block';
 }
