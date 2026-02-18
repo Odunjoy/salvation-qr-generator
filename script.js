@@ -135,7 +135,8 @@ function randomizeSelections() {
   testimonialSelect.selectedIndex = Math.floor(Math.random() * 7);
 }
 
-// Download QR code with PRESIDENTIAL-LEVEL ULTRA-PREMIUM DESIGN
+// Download QR code with ULTRA-PREMIUM WORLD-CLASS DESIGN
+// Apple / Tesla / Hermès Presentation Quality
 function downloadQRCode() {
   if (!selectedCategory) {
     alert('Please select a category first!');
@@ -152,9 +153,9 @@ function downloadQRCode() {
   const teaserIndex = parseInt(document.getElementById('teaser-selector').value);
   const testimonialIndex = parseInt(document.getElementById('testimonial-selector').value);
 
-  // EXECUTIVE-LEVEL MESSAGING (Refined, dignified)
+  // ULTRA-REFINED MESSAGING (Minimal, powerful)
   const teaserMessages = [
-    'A message of profound significance awaits you',
+    'A message of profound significance awaits',
     'Discover something extraordinary within',
     'This moment could change everything',
     'A personal message, meant for you',
@@ -164,119 +165,76 @@ function downloadQRCode() {
   ];
 
   const testimonials = [
-    '"Profoundly moving" — Thousands Transformed',
-    '"Life-altering wisdom" — Global Impact',
-    '"Exactly what I needed" — Universal Praise',
-    '"Deeply meaningful" — Changed Lives',
-    '"Extraordinary message" — Worldwide Reach',
-    '"Pure inspiration" — 1000+ Lives Changed',
-    '"Genuine hope restored" — Proven Results'
+    '\"Profoundly moving\" — Thousands Transformed',
+    '\"Life-altering wisdom\" — Global Impact',
+    '\"Exactly what I needed\" — Universal Praise',
+    '\"Deeply meaningful\" — Changed Lives',
+    '\"Extraordinary message\" — Worldwide Reach',
+    '\"Pure inspiration\" — 1000+ Lives Changed',
+    '\"Genuine hope restored\" — Proven Results'
   ];
 
   const teaser = teaserMessages[teaserIndex];
   const testimonial = testimonials[testimonialIndex];
 
-  // EXECUTIVE COLOR PALETTES (Sophisticated, refined)
-  const executivePalettes = {
-    love: { primary: '#8B4C5C', secondary: '#6B3646', light: '#F5EEF0' },
-    healing: { primary: '#2C5F4A', secondary: '#1E4435', light: '#EDF5F1' },
-    provision: { primary: '#9B7653', secondary: '#75583D', light: '#F5F0E8' },
-    protection: { primary: '#2E4A5C', secondary: '#1F3340', light: '#EBF1F5' },
-    salvation: { primary: '#5D4A7A', secondary: '#443557', light: '#F0EDF5' },
-    peace: { primary: '#2A6B7A', secondary: '#1E4D58', light: '#ECF3F5' },
-    forgiveness: { primary: '#9B6446', secondary: '#6F4833', light: '#F3EDEA' },
-    cross: { primary: '#7A4A4A', secondary: '#573535', light: '#F2EBEB' },
-    resurrection: { primary: '#3F6B4F', secondary: '#2D4D39', light: '#EEF3F0' },
-    grace: { primary: '#8B5B6F', secondary: '#63414F', light: '#F2EDF0' }
+  // ULTRA-REFINED COLOR PALETTES (Sophisticated neutrals with subtle color)
+  const ultraPalettes = {
+    love: { primary: '#2C2420', accent: '#8B7355', light: '#F5F0EB' },
+    healing: { primary: '#1F2922', accent: '#5F7C6A', light: '#EEF3F0' },
+    provision: { primary: '#2A2520', accent: '#8B7355', light: '#F5F0E8' },
+    protection: { primary: '#1E2428', accent: '#5F6F7C', light: '#EDF1F3' },
+    salvation: { primary: '#252129', accent: '#6F5F7C', light: '#F0EEF3' },
+    peace: { primary: '#1F2628', accent: '#5C6F75', light: '#EEF2F3' },
+    forgiveness: { primary: '#282320', accent: '#7C6C5F', light: '#F2EFEC' },
+    cross: { primary: '#282020', accent: '#7C5F5F', light: '#F2EBEB' },
+    resurrection: { primary: '#212620', accent: '#5F7265', light: '#EEF2EF' },
+    grace: { primary: '#272024', accent: '#7C6570', light: '#F1EEEF' }
   };
 
-  const palette = executivePalettes[selectedCategory] || executivePalettes.salvation;
+  const palette = ultraPalettes[selectedCategory] || ultraPalettes.salvation;
 
-  // Create canvas with executive dimensions (portrait, professional)
+  // Canvas - Premium portrait format
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
 
   canvas.width = 800;
   canvas.height = 1100;
 
-  // SOPHISTICATED GRADIENT BACKGROUND (Subtle, refined)
-  const bgGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  bgGradient.addColorStop(0, '#F8F9FA');
-  bgGradient.addColorStop(0.5, '#FFFFFF');
-  bgGradient.addColorStop(1, '#F5F6F8');
-  ctx.fillStyle = bgGradient;
+  // LUXURY CREAM BACKGROUND (Sophisticated, timeless)
+  ctx.fillStyle = '#FAF8F5';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // PREMIUM WHITE CARD with elegant shadow
-  const cardMargin = 40;
-  const cardRadius = 20;
+  // MINIMAL ELEGANT BORDER (Single refined stroke)
+  const margin = 50;
+  ctx.strokeStyle = palette.primary + '15';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(margin, margin, canvas.width - margin * 2, canvas.height - margin * 2);
 
-  // Sophisticated multi-layer shadow
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.08)';
-  ctx.shadowBlur = 30;
-  ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 15;
+  // REFINED "FREE" TEXT (Understated elegance)
+  ctx.font = '300 56px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = palette.accent;
+  ctx.fillText('COMPLIMENTARY', canvas.width / 2, 140);
 
-  // Card background
-  ctx.fillStyle = '#FFFFFF';
+  // ELEGANT DIVIDER (Thin, refined)
+  ctx.strokeStyle = palette.primary + '20';
+  ctx.lineWidth = 0.5;
   ctx.beginPath();
-  ctx.roundRect(cardMargin, cardMargin, canvas.width - cardMargin * 2, canvas.height - cardMargin * 2, cardRadius);
-  ctx.fill();
+  ctx.moveTo(250, 170);
+  ctx.lineTo(550, 170);
+  ctx.stroke();
 
-  // Reset shadow
-  ctx.shadowColor = 'transparent';
-  ctx.shadowBlur = 0;
-  ctx.shadowOffsetY = 0;
-
-  // ELEGANT TOP BORDER (Refined, executive)
-  const borderGradient = ctx.createLinearGradient(cardMargin, cardMargin, canvas.width - cardMargin, cardMargin);
-  borderGradient.addColorStop(0, palette.secondary);
-  borderGradient.addColorStop(0.5, palette.primary);
-  borderGradient.addColorStop(1, palette.secondary);
-  ctx.fillStyle = borderGradient;
-  ctx.fillRect(cardMargin, cardMargin, canvas.width - cardMargin * 2, 6);
-
-  // SOPHISTICATED "FREE" TEXT (Refined gold, elegant)
-  ctx.font = '700 72px Georgia, serif';
-  ctx.textAlign = 'center';
-
-  // Refined gold gradient
-  const goldGradient = ctx.createLinearGradient(0, 130, 0, 200);
-  goldGradient.addColorStop(0, '#C9A961');
-  goldGradient.addColorStop(0.5, '#B8954A');
-  goldGradient.addColorStop(1, '#A67C3C');
-  ctx.fillStyle = goldGradient;
-
-  // Subtle elegant glow
-  ctx.shadowColor = 'rgba(201, 169, 97, 0.3)';
-  ctx.shadowBlur = 20;
-  ctx.fillText('FREE', canvas.width / 2, 160);
-
-  // Reset shadow
-  ctx.shadowColor = 'transparent';
-  ctx.shadowBlur = 0;
-
-  // REFINED ICON (Elegant, not playful)
-  ctx.font = '56px Arial';
+  // SOPHISTICATED TEASER (Professional hierarchy)
+  ctx.font = '400 26px Georgia, serif';
   ctx.fillStyle = palette.primary;
-  ctx.fillText('✦', canvas.width / 2, 235);
-
-  // EXECUTIVE TEASER MESSAGE (Professional typography)
-  ctx.font = '500 24px Georgia, serif';
-  ctx.fillStyle = '#2C2C2C';
   ctx.textAlign = 'center';
 
-  // Subtle text shadow for depth
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.08)';
-  ctx.shadowBlur = 3;
-  ctx.shadowOffsetY = 1;
-
-  // Word wrap with golden ratio lineheight
-  const maxWidth = canvas.width - 120;
+  // Word wrap with refined spacing
+  const maxWidth = canvas.width - 140;
   const words = teaser.split(' ');
   let line = '';
-  let y = 295;
-  const lineHeight = 38;
+  let y = 230;
+  const lineHeight = 42;
 
   for (let word of words) {
     const testLine = line + word + ' ';
@@ -291,42 +249,20 @@ function downloadQRCode() {
   }
   ctx.fillText(line.trim(), canvas.width / 2, y);
 
-  // Reset shadow
-  ctx.shadowColor = 'transparent';
-  ctx.shadowBlur = 0;
-  ctx.shadowOffsetY = 0;
-
-  // SUBTLE DIVIDER LINE (Elegant accent)
-  const dividerY = y + 35;
-  const dividerGradient = ctx.createLinearGradient(200, dividerY, 600, dividerY);
-  dividerGradient.addColorStop(0, 'transparent');
-  dividerGradient.addColorStop(0.5, palette.primary + '40');
-  dividerGradient.addColorStop(1, 'transparent');
-  ctx.strokeStyle = dividerGradient;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(200, dividerY);
-  ctx.lineTo(600, dividerY);
-  ctx.stroke();
-
-  // QR CODE with LUXURY FRAME (Executive presentation)
-  const qrSize = 420;
+  // QR CODE with MINIMAL REFINED FRAME
+  const qrSize = 450;
   const qrX = (canvas.width - qrSize) / 2;
-  const qrY = dividerY + 50;
+  const qrY = y + 60;
 
-  // Outer sophisticated border
-  const outerBorderWidth = 3;
-  ctx.strokeStyle = palette.secondary;
-  ctx.lineWidth = outerBorderWidth;
-  ctx.strokeRect(qrX - outerBorderWidth, qrY - outerBorderWidth, qrSize + outerBorderWidth * 2, qrSize + outerBorderWidth * 2);
+  // Ultra-thin sophisticated border
+  ctx.strokeStyle = palette.primary;
+  ctx.lineWidth = 1;
+  ctx.strokeRect(qrX - 1, qrY - 1, qrSize + 2, qrSize + 2);
 
-  // Inner refined accent
-  const innerBorderWidth = 14;
-  const innerGradient = ctx.createLinearGradient(qrX, qrY, qrX + qrSize, qrY + qrSize);
-  innerGradient.addColorStop(0, palette.light);
-  innerGradient.addColorStop(1, '#FFFFFF');
-  ctx.fillStyle = innerGradient;
-  ctx.fillRect(qrX - innerBorderWidth, qrY - innerBorderWidth, qrSize + innerBorderWidth * 2, qrSize + innerBorderWidth * 2);
+  // Minimal inner spacing
+  const innerPadding = 12;
+  ctx.fillStyle = palette.light;
+  ctx.fillRect(qrX - innerPadding, qrY - innerPadding, qrSize + innerPadding * 2, qrSize + innerPadding * 2);
 
   // White QR background
   ctx.fillStyle = '#FFFFFF';
@@ -335,44 +271,28 @@ function downloadQRCode() {
   // Draw QR code
   ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
-  // Subtle frame shadow
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.06)';
-  ctx.shadowBlur = 15;
-  ctx.shadowOffsetY = 5;
-  ctx.strokeStyle = palette.primary + '20';
-  ctx.lineWidth = 1;
-  ctx.strokeRect(qrX - innerBorderWidth, qrY - innerBorderWidth, qrSize + innerBorderWidth * 2, qrSize + innerBorderWidth * 2);
-
   // Reset shadow
   ctx.shadowColor = 'transparent';
   ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 0;
 
-  // PROFESSIONAL CALL-TO-ACTION (Dignified, clear)
-  const ctaY = qrY + qrSize + 60;
-  ctx.font = '600 26px Georgia, serif';
-  ctx.fillStyle = '#2C2C2C';
-  ctx.textAlign = 'center';
-  ctx.fillText('SCAN TO DISCOVER', canvas.width / 2, ctaY);
+  // REFINED CALL TO ACTION (Minimal, powerful)
+  ctx.font = '600 20px Inter, sans-serif';
+  ctx.fillStyle = palette.primary;
+  ctx.letterSpacing = '2px';
+  ctx.fillText('SCAN TO DISCOVER', canvas.width / 2, qrY + qrSize + 55);
 
-  // EXECUTIVE TESTIMONIAL (Credible, professional)
-  ctx.font = 'italic 18px Georgia, serif';
-  ctx.fillStyle = '#6C757D';
-  ctx.fillText(testimonial, canvas.width / 2, ctaY + 50);
+  // ELEGANT TESTIMONIAL (Understated)
+  ctx.font = 'italic 16px Georgia, serif';
+  ctx.fillStyle = palette.accent;
+  ctx.letterSpacing = '0px';
+  ctx.fillText(testimonial, canvas.width / 2, qrY + qrSize + 90);
 
-  // REFINED TAGLINE (Trust-building)
-  ctx.font = '400 15px Georgia, serif';
-  ctx.fillStyle = '#8B8B8B';
-  ctx.fillText('Trusted by thousands worldwide', canvas.width / 2, ctaY + 80);
-
-  // ELEGANT FOOTER ACCENT (Sophisticated finish)
-  const footerY = canvas.height - 70;
-  const footerGrad = ctx.createLinearGradient(150, footerY, 650, footerY);
-  footerGrad.addColorStop(0, 'transparent');
-  footerGrad.addColorStop(0.5, palette.primary + '25');
-  footerGrad.addColorStop(1, 'transparent');
-  ctx.fillStyle = footerGrad;
-  ctx.fillRect(150, footerY, 500, 1);
+  // SOPHISTICATED TAGLINE (Professional trust signal)
+  ctx.font = '300 13px Inter, sans-serif';
+  ctx.fillStyle = palette.primary + '60';
+  ctx.letterSpacing = '1px';
+  ctx.fillText('TRUSTED WORLDWIDE', canvas.width / 2, canvas.height - 70);
 
   // Download
   canvas.toBlob((blob) => {
