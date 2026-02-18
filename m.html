@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+
+        // Map short params to long params
+        const category = params.get('c') || 'salvation';
+        const teaser = params.get('t') || '0';
+        const testimonial = params.get('s') || '0';
+
+        // Redirect to message.html with full params
+        window.location.href = `message.html?category=${category}&teaser=${teaser}&testimonial=${testimonial}`;
+    </script>
+</head>
+
+<body>
+    <p>Loading your message...</p>
+</body>
+
+</html>

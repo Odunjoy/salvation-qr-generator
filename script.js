@@ -95,8 +95,8 @@ async function selectCategory(category) {
   const teaserIndex = parseInt(document.getElementById('teaser-selector').value);
   const testimonialIndex = parseInt(document.getElementById('testimonial-selector').value);
 
-  // Generate and show shareable link
-  const messageUrl = `https://odunjoy.github.io/salvation-qr-generator/message.html?category=${category}&teaser=${teaserIndex}&testimonial=${testimonialIndex}`;
+  // Generate and show shareable link (SHORT FORMAT)
+  const messageUrl = `odunjoy.github.io/salvation-qr-generator/m?c=${category}&t=${teaserIndex}&s=${testimonialIndex}`;
   document.getElementById('messageLink').value = messageUrl;
   document.getElementById('shareLinkSection').style.display = 'block';
 }
