@@ -95,8 +95,29 @@ async function selectCategory(category) {
   const teaserIndex = parseInt(document.getElementById('teaser-selector').value);
   const testimonialIndex = parseInt(document.getElementById('testimonial-selector').value);
 
-  // Generate and show shareable link (SHORT FORMAT)
-  const messageUrl = `odunjoy.github.io/salvation-qr-generator/m?c=${category}&t=${teaserIndex}&s=${testimonialIndex}`;
+  // Category short codes (1-2 letters)
+  const shortCodes = {
+    love: 'l',
+    healing: 'h',
+    provision: 'pv',
+    protection: 'pt',
+    salvation: 's',
+    peace: 'pc',
+    forgiveness: 'f',
+    cross: 'c',
+    resurrection: 'r',
+    grace: 'g',
+    hope: 'hp',
+    strength: 'st',
+    faith: 'ft',
+    deliverance: 'd',
+    truth: 't',
+    scripture: 'sc'
+  };
+
+  // Generate and show shareable link (ULTRA-SHORT FORMAT)
+  const shortCode = shortCodes[category] || category;
+  const messageUrl = `odunjoy.github.io/salvation-qr-generator/m?c=${shortCode}&t=${teaserIndex}&s=${testimonialIndex}`;
   document.getElementById('messageLink').value = messageUrl;
   document.getElementById('shareLinkSection').style.display = 'block';
 }

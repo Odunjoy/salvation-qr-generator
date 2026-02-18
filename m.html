@@ -8,8 +8,29 @@
         // Get URL parameters
         const params = new URLSearchParams(window.location.search);
 
-        // Map short params to long params
-        const category = params.get('c') || 'salvation';
+        // Reverse mapping from short codes to full category names
+        const categoryMap = {
+            'l': 'love',
+            'h': 'healing',
+            'pv': 'provision',
+            'pt': 'protection',
+            's': 'salvation',
+            'pc': 'peace',
+            'f': 'forgiveness',
+            'c': 'cross',
+            'r': 'resurrection',
+            'g': 'grace',
+            'hp': 'hope',
+            'st': 'strength',
+            'ft': 'faith',
+            'd': 'deliverance',
+            't': 'truth',
+            'sc': 'scripture'
+        };
+
+        // Get short params and map to full params
+        const shortCode = params.get('c') || 's';
+        const category = categoryMap[shortCode] || 'salvation';
         const teaser = params.get('t') || '0';
         const testimonial = params.get('s') || '0';
 
